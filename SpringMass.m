@@ -1,5 +1,6 @@
 clear;
 clf;
+close all;
 
 %% Constants
 m = 1;
@@ -41,11 +42,12 @@ a_meas = a_meas / dt;
 
 
 for i = 1 : length(a_ideal)
-    Theta(i,1:12) = [1, v_meas(i), s_meas(i),...
+    Theta(i,1:6) = [1, v_meas(i), s_meas(i),...
     v_meas(i)*s_meas(i), v_meas(i)^2,...
-    s_meas(i)^2, s_meas(i)^2*v_meas(i),...
-    s_meas(i)*v_meas(i)^2, s_meas(i)^3, v_meas(i)^3, sin(s_meas(i)), cos(s_meas(i))];
+    s_meas(i)^2];
 end
+
+Theta_functions = {'1', 'v', 's', 'v*s', 'v^2', 's^2'};
 
 RMS_theta = ones(length(a_ideal), 1) * rms(Theta);
 Theta_norm = Theta ./ RMS_theta;
@@ -62,11 +64,9 @@ end
 
 Xi = inv(Theta_norm'*Theta_norm) * Theta_norm' * x_der(:, 2);
 
-
-
 % Sparse regression 
-lambda = 1.5;   
-n_iter = 10;
+lambda = 0.15;   
+n_iter = 100;
 
 for i = 1:n_iter
    
@@ -84,7 +84,83 @@ for i = 1:n_iter
 end
 
 Xi = Xi ./ RMS_theta(1,:)';
-% zaj és normálás, regularizáció(lambda)
 
+% for i = 1:length(Xi)
+%     if Xi(i) ~= 0
+%         fprintf('%6s tag együtthatója: %8.4f\n', Theta_functions{i}, Xi(i));
+%     end
+% end
 
+fprintf('\nIdeal equation without noise:\n');
+fprintf('a = (%.6f)*v + (%.6f)*s ', (-c / m), (-k / m));
+fprintf('\n');
+
+fprintf('\nEquation recreated with  from the noisy measurement:\n');
+if Xi(1) ~= 0
+    fprintf('a = %.6f', Xi(1));
+else
+    fprintf('a = ');
+end
+for i = 2:length(Xi)
+    if Xi(i) > 0
+        fprintf(' + %.6f*%s', Xi(i), Theta_functions{i});
+    elseif Xi(i) < 0
+        fprintf(' - %.6f*%s', abs(Xi(i)), Theta_functions{i});
+    end
+end
+fprintf('\n');
+
+% Recreation
+s_rec = zeros(1, length(t));
+v_rec = zeros(1, length(t));
+a_rec = zeros(1, length(t));
+
+s_rec(1) = s_meas(1);
+v_rec(1) = v_meas(1);
+for i = 1:(length(t) - 1)
+    Theta_rec(i,1:6) = [1, v_rec(i), s_rec(i),...
+    v_rec(i)*s_rec(i), v_rec(i)^2,...
+    s_rec(i)^2];
+
+    a_rec(i) = Theta_rec(i, :) * Xi;
+    v_rec(i+1) = v_rec(i) + a_rec(i) * dt;
+    s_rec(i+1) = s_rec(i) + v_rec(i) * dt;
+
+end
+%% Plot
+subplot(3,1,1);
+grid on;
+grid minor;
+hold on;
+title 'Distance'
+xlabel('[s]');
+ylabel('[m]')
+plot(t, s_meas, 'r--', 'LineWidth', 0.5);
+plot(t, s_ideal, 'b--', 'LineWidth', 0.5);
+plot(t, s_rec, 'k', 'LineWidth', 0.5);
+legend('Measured', 'Ideal', 'SINDy from measured');
+
+subplot(3,1,2);
+grid on;
+grid minor;
+hold on;
+title 'Velocity'
+xlabel('[s]');
+ylabel('[m/s]')
+plot(t, v_meas, 'r--', 'LineWidth', 0.5);
+plot(t, v_ideal, 'b--', 'LineWidth', 0.5)
+plot(t, v_rec, 'k', 'LineWidth', 0.5);
+legend('Measured', 'Ideal', 'SINDy from measured');
+
+subplot(3,1,3);
+grid on;
+grid minor;
+hold on;
+title 'Acceleration';
+xlabel('[s]');
+ylabel('[m/s^2]')
+plot(t, a_meas, 'r--', 'LineWidth', 0.5);
+plot(t, a_ideal, 'b--', 'LineWidth', 0.5);
+plot(t, a_rec, 'k', 'LineWidth', 0.5);
+legend('Measured', 'Ideal', 'SINDy from measured');
 
