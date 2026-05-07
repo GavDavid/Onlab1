@@ -62,7 +62,7 @@ for i = 1 : length(v_meas)
     x_der(i, 2) = a_meas(i);
 end
 
-Xi = inv(Theta_norm'*Theta_norm) * Theta_norm' * x_der(:, 2);
+Xi = inv(Theta_norm'*Theta_norm + 1.5e-2 * eye(6,6)) * Theta_norm' * x_der(:, 2);
 
 % Sparse regression 
 lambda = 0.15;   
@@ -75,7 +75,7 @@ for i = 1:n_iter
     remains = (Xi ~= 0);
   
     Theta_new = Theta_norm(:, remains);
-    Xi_red = inv(Theta_new' * Theta_new) * Theta_new' * x_der(:, 2);
+    Xi_red = inv(Theta_new' * Theta_new + 1.5e-2 * eye(size(Theta_new' * Theta_new))) * Theta_new' * x_der(:, 2);
     
     Xi_new = zeros(size(Xi));
     Xi_new(remains) = Xi_red;
