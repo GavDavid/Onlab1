@@ -7,7 +7,7 @@ m = 1;
 k = 4;
 c = 0.8;
 dt = 1/100; % [s]
-t = 0:dt:30; % [s]
+t = 0:dt:15; % [s]
 s_ideal(1) = 1;
 v_ideal(1) = 0;
 
@@ -27,23 +27,23 @@ a_ideal(length(t)) = -k / m * s_ideal(length(t)) - c / m * v_ideal(length(t));
 
 s_meas = s_ideal;
 
-noise_level = 0.00001;    
+noise_level = 0.001;    
 gauss = noise_level * randn(size(s_meas));
 
 s_meas = s_meas + gauss;
-
-v_meas = diff(s_meas);
-v_meas(length(v_meas) + 1) = v_meas(length(v_meas));
-v_meas = v_meas / dt;
-
-a_meas = diff(v_meas);
-a_meas(length(a_meas) + 1) = a_meas(length(a_meas));
-a_meas = a_meas / dt;
-
-% s_filt = sgolayfilt(s_meas,3,21);
 % 
-% v_meas = gradient(s_filt,dt);
-% a_meas = gradient(v_meas,dt);
+% v_meas = diff(s_meas);
+% v_meas(length(v_meas) + 1) = v_meas(length(v_meas));
+% v_meas = v_meas / dt;
+% 
+% a_meas = diff(v_meas);
+% a_meas(length(a_meas) + 1) = a_meas(length(a_meas));
+% a_meas = a_meas / dt;
+
+s_filt = sgolayfilt(s_meas,3,21);
+
+v_meas = gradient(s_filt,dt);
+a_meas = gradient(v_meas,dt);
 
 for i = 1 : length(a_ideal)
     Theta(i,1:10) = [1, v_meas(i), s_meas(i),...
@@ -91,9 +91,10 @@ end
 
 % SVD felbontás inverz
 [U,S,V] = svd(Theta_norm, 'econ');
-
+%%
 % V utolsó oszlopát megnézve mivel ez a legkisebb szinguláris érték
 % látszik, hogy v^3 domináns -> kidobás
+
 
 
 remove_idx = 10;
@@ -106,7 +107,6 @@ Theta_functions_reduced(remove_idx) = [];
 
 [U,S,V] = svd(Theta_reduced,'econ');
 
-
 % ismét V utolsó oszlopát nézve látszik, hogy az s-t tartalmazó tagok
 % dominánsak így először kidobom s^3-t
 
@@ -118,6 +118,7 @@ Theta_functions_reduced(remove_idx) = [];
 
 [U,S,V] = svd(Theta_reduced,'econ');
 
+
 % s*v^2 és v*s dominánsak, eldobom ezeket
 remove_idx = [4, 8];
 
@@ -126,6 +127,8 @@ Theta_reduced(:,remove_idx) = [];
 Theta_functions_reduced(remove_idx) = [];
 
 [U,S,V] = svd(Theta_reduced,'econ');
+
+
 
 % s^2 és s^2*v dominánsak, eldobom
 
@@ -137,6 +140,7 @@ Theta_functions_reduced(remove_idx) = [];
 
 [U,S,V] = svd(Theta_reduced,'econ');
 
+
 % v és v^2 dominánsak, de v^2 a nagyobb rendű így eldobom azt
 
 remove_idx = 4;
@@ -147,7 +151,7 @@ Theta_functions_reduced(remove_idx) = [];
 
 [U,S,V] = svd(Theta_reduced,'econ');
 
-V(:,end)
+
 % így már elég nagyok a szinguláris értékek
 active_features = true(1,length(Theta_functions));
 
@@ -181,7 +185,7 @@ s = diag(S);
 % Xi_reduced = V * diag(s_inv) * U' * x_der(:,2);
 
 % Thikonov SVD
-lambda_reg = 1e-3;
+lambda_reg = 1e-5;
 
 s_filt = s ./ (s.^2 + lambda_reg);
 
@@ -225,7 +229,6 @@ for i = 1:n_iter
     % Xi_red = V * diag(s_inv) * U' * x_der(:,2);
 
     % Thikonov SVD
-    lambda_reg = 1e-3;
     
     s_filt = s ./ (s.^2 + lambda_reg);
     
@@ -251,7 +254,7 @@ fprintf('\nIdeal equation without noise:\n');
 fprintf('a = (%.6f)*v + (%.6f)*s ', (-c / m), (-k / m));
 fprintf('\n');
 
-fprintf('\nEquation recreated with  from the noisy measurement:\n');
+fprintf('\nEquation recreated from the noisy measurement:\n');
 if Xi(1) ~= 0
     fprintf('a = %.6f', Xi(1));
 else

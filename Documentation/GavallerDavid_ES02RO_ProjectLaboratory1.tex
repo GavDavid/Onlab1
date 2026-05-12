@@ -1,0 +1,136 @@
+\documentclass[12pt,a4paper]{article}
+
+% USEPACKAGE LISTA
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{marvosym} 
+\usepackage{wrapfig}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{multicol}
+\hypersetup{colorlinks,citecolor=black,filecolor=black,linkcolor=black,urlcolor=black}
+\usepackage{pdfpages}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{t1enc}
+\usepackage[english]{babel}
+\usepackage{bm}
+\usepackage{lipsum}
+\usepackage{titling}
+\usepackage{float}
+\renewcommand\maketitlehooka{}
+\renewcommand\maketitlehookd{}
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+
+\usepackage{pgfplots}
+\pgfplotsset{height = 10cm, width=15cm,compat=1.9}
+
+\usepackage[left=1cm,right=1cm,top=2cm,bottom=2cm]{geometry}
+
+\usepackage{siunitx}
+\newcommand{\ohm}{$\Omega$}
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+% Színek definiálása
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+% Globális beállítások a listings-hez
+\lstset{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\small,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    language=C,
+    % --- ÉKEZETEK KEZELÉSE (Ez a kulcs!) ---
+    extendedchars=true,
+    literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ö}{{\"o}}1 {ő}{{\H{o}}}1 {ú}{{\'u}}1 {ü}{{\"u}}1 {ű}{{\H{u}}}1
+             {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ö}{{\"O}}1 {Ő}{{\H{O}}}1 {Ú}{{\'U}}1 {Ü}{{\"U}}1 {Ű}{{\H{U}}}1
+}
+
+\DeclareMathOperator{\atan}{arctan}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1em}
+\pagestyle{fancy}
+\fancyhf{}
+\fancypagestyle{plain}{\fancyfoot[C]{\thepage. page}}
+
+\title{Project Laboratory 1}
+\author{Dávid Gavallér }
+\date{\today}
+
+\lhead{Dávid Gavallér }
+\chead{}
+\rhead{ES02RO}
+\cfoot{\thepage. page}
+
+% ITT KEZDŐDIK A DOKUMENTUM
+\begin{document}
+
+\begin{titlingpage}
+    \vspace*{-0.5cm}
+    \begin{center}
+        \includegraphics[width=0.3\textwidth,keepaspectratio]{viklogo.jpeg}
+    \end{center}
+    \vfill
+    \begin{center}
+        {\LARGE\bfseries \thetitle\par}
+        \vspace{1.0em}
+        {\large \theauthor\\
+        ES02RO\par}
+        \vspace{1.0em}
+        {\large \thedate\par}
+    \end{center}
+    \vfill
+\end{titlingpage}
+
+\newpage
+\tableofcontents
+\newpage
+
+\section{Abstract}
+This document presents an investigation into discrepancy learning methods for nonlinear
+dynamical systems using Sparse Identification of Nonlinear Dynamics (SINDy) and Neural Network
+based correction models. Several systems were examined, including a linear 
+spring-mass-damper system, a falling ball with nonlinear aerodynamic drag, and the nonlinear 
+Van der Pol oscillator.\par
+
+The objective of the work was to:\par
+
+\begin{enumerate}
+    \item Reconstruct governing differential equations from simulated measurement data with SINDy
+          to understand it
+    \item Investigate the effect of measurement noise and numerical differentiation
+    \item Apply sparse regression techniques to identify compact physical models
+    \item Introduce artificial discrepancies into physical systems
+    \item Learn and compensate these discrepancies using both SINDy and Neural Networks
+\end{enumerate}
+
+The results demonstrate that SINDy can successfully recover interpretable governing equations, 
+while discrepancy learning methods estimate and compensate for the difference between the
+nominal model and the observed system dynamics.
+
+
+\end{document}
