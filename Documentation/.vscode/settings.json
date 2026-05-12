@@ -1,0 +1,9 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "Set-Content": true,
+        "ForEach-Object": true,
+        "Write-Error": true,
+        "pdflatex": true,
+        "Test-Path": true
+    }
+}
