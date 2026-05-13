@@ -283,10 +283,10 @@ The system is illustrated in Figure \ref{fig:spring-mass}.\par
 
 The MATLAB implementation of the system started off from Newton's second law:
 \begin{equation}
-    F = ma
+    F = m \cdot a
 \end{equation}
-Knowing that the forces acting on the mass are the spring force $F_s = -ks$ and
-the damping force $F_d = -cv$, the governing equation of the system can be written as:
+Knowing that the forces acting on the mass are the spring force $F_s = -k \cdot s$ and
+the damping force $F_d = -c \cdot v$, the governing equation of the system can be written as:
 \begin{equation}
     -k \cdot s - c \cdot v = m \cdot a
 \end{equation}
@@ -339,7 +339,7 @@ Next, it was time to test SINDy on the noisy "measurement" data.
 A library of candidate functions was constructed:
 \begin{equation}
     \bm{\Theta}(\bm{X}) = \begin{bmatrix}
-    1 & s & v & vs & v^2 & s^2 & s^2v & sv^2 & s^3 & v^3
+    1 & v & s & vs & v^2 & s^2 & s^2v & sv^2 & s^3 & v^3
     \end{bmatrix}
 \end{equation}
 
@@ -365,8 +365,317 @@ This way, the results for $\bm{\Xi}$ are the following
     \end{bmatrix}
 \end{equation}  
 
+Since these coefficients are not sparse, a thresholding step was applied to set small
+coefficients to zero, then the coefficient were recalculated. Choosing a threshold of 0.01 
+and doing multiple iterations of this process, the final result was:
+\begin{equation}
+    \bm{\Xi} = \begin{bmatrix}
+    0 \\
+   -0.3354 \\
+   -0.8997 \\
+    0 \\
+    0 \\
+    0 \\
+    0 \\
+    0 \\
+    0 \\
+    0 \\
+    \end{bmatrix}
+\end{equation}
+
+These are not the final results, since the library was normalized,
+the coefficients need to be denormalized. After denormalization, the final results are:
+\begin{equation}
+    \bm{\Xi} = \begin{bmatrix}
+    0 \\
+   -0.8011 \\
+   -3.9972 \\
+    0 \\
+    0 \\
+    0 \\
+    0 \\
+    0 \\
+    0 \\
+    0 \\
+    \end{bmatrix}
+\end{equation}
+This means that the identified governing equation is:
+\begin{equation}
+    a = -3.9972 \cdot s - 0.8011 \cdot v
+\end{equation}
+This is very close to the true governing equation, which is:
+\begin{equation}
+    a = -4 \cdot s - 0.8 \cdot v
+\end{equation}
+As can be seen, the identification was successful and the coefficients are very close to the
+true values. Visual representation of the results is shown in Figure \ref{fig:spring-mass-identified-equation}.\par
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{spring_mass_identified_equation.png}
+    \caption{Identified governing equation for the spring-mass-damper system }
+    \label{fig:spring-mass-identified-equation}
+\end{figure}
+
+The position and velocity values were calculated with forward Euler integration
+using the identified governing equation\par
+
+After this, the same process was repeated with a higher noise level of 0.0001,
+which is 10 times higher than before.
+The results were not as good as before and the thresholding value had to be
+adjusted to achieve a sparse solution, but still the identification was successful and
+the identified governing equation was:
+\begin{equation}
+    a = -4.0957 \cdot s - 0.9786 \cdot v
+\end{equation}
+This is still close to the true governing equation, but the coefficients are not
+as accurate as before. Visual representation of the results is shown in
+Figure \ref{fig:spring-mass-identified-equation-noisy}.\par       
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{spring_mass_identified_equation_noisy.png}
+    \caption{Identified governing equation for the spring-mass-damper system with higher noise level}
+    \label{fig:spring-mass-identified-equation-noisy}
+\end{figure}  
+By increasing the noise level even more to 0.001, the results completely got out of hand,
+by adjusting the thresholding value (to 4.5), a sparse solution could be achieved, but the identified
+governing equation was very far from the true one:
+\begin{equation}
+    a = - 31.2664 \cdot v + 13.373877 \cdot v^3
+\end{equation}
+Visual representation of the results is shown in Figure \ref{fig:spring-mass-identified-equation-very-noisy}.\par
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{spring_mass_identified_equation_very_noisy.png}
+    \caption{Identified governing equation for the spring-mass-damper system with very high noise level}
+    \label{fig:spring-mass-identified-equation-very-noisy}
+\end{figure}
+
+To overcome this issue, instead of using the diff() function for numerical differentiation,
+a more robust method was used, first applying a Savitzky-Golay filter to the noisy position 
+data to smooth it, then apply the gradient() function, because it calculates the numerical 
+derivative using central differences, which is more accurate and less sensitive to noise than 
+the diff() function. The parameters for the Savitzky-Golay filter were a window size of 21
+and a polynomial order of 3. With only this much change, the results got much better. 
+With the same 0.001 noise level, the identified governing equation was:
+\begin{equation}
+    a = -4.022 \cdot s - 0.7619 \cdot v
+\end{equation}
+Visual representation of the results is shown in Figure \ref{fig:spring-mass-identified-equation-smoothed}.\par
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{spring_mass_identified_equation_smoothed.png}
+    \caption{Identified governing equation for the spring-mass-damper system with smoothed data}
+    \label{fig:spring-mass-identified-equation-smoothed}
+\end{figure}
+Even with a noise level of 0.01, the following governing equation was identified:
+\begin{equation}
+    a = -4.4315 \cdot s - 0.8010 \cdot v
+\end{equation}  
+Which can be considered very impressive by looking at the visualisation of the results in Figure \ref{fig:spring-mass-identified-equation-smoothed-very-noisy}.\par
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{spring_mass_identified_equation_smoothed_very_noisy.png}
+    \caption{Identified governing equation for the spring-mass-damper system with smoothed data and very high noise level}
+    \label{fig:spring-mass-identified-equation-smoothed-very-noisy}
+\end{figure}
+
+Now that it is proven that smooting the data before numerical differentiation
+can significantly improve the results, making it more robust to noise, the 
+next step was to test the effect of the choice of the candidate functions in the library.  
+What happens if the functions in the library are linearly dependent? Intuition says that
+the coefficient weights should be distributed among the linearly dependent functions.
+Let's change s*v to s in the library, basially duplicating the s term, and see what happens.
+The noise level is reduced to 0, so that the effect of the linearly dependent functions can be
+observed more clearly, without the influence of noise.
+The library is now:
+\begin{equation}
+    \bm{\Theta}(\bm{X}) = \begin{bmatrix}
+    1 & v & s & s & v^2 & s^2 & s^2v & sv^2 & s^3 & v^3
+    \end{bmatrix}
+\end{equation}
+After running the simulation, the coefficients couldn't be determined,
+MATLAB sent a warning about the matrix being singular. The inverse of a singular matrix 
+does not exist, so the regression problem cannot be solved. This shows that 
+the choice of the candidate functions in the library is very important, and linearly dependent
+functions should be avoided, otherwise the regression problem cannot be solved.\par
+A way to avoid this happening is throwing out one of the linearly dependent functions. 
+But of course, it is now always obvious which functions are linearly dependent.
+A way to determine the linearly dependent functions is through Singular Value
+Decomposition (SVD) of the library matrix $\bm{\Theta}$. The singular values of the matrix
+can be examined, and if there are any singular values that are close to zero, it indicates 
+that there are linearly dependent functions in the library. By looking at the right
+singular vectors corresponding to the small singular values, the linearly dependent functions
+can be identified.\par 
+The singular values of the library matrix shown in equation (20) are:
+\begin{equation}
+    \sigma = \begin{bmatrix}
+    90.6002 \\
+    54.3295 \\
+    40.3114 \\
+    30.2025 \\
+    24.7243 \\
+    21.0753 \\
+    12.7127 \\
+    8.36104 \\
+    5.06999 \\
+    6.32417e-15
+    \end{bmatrix}
+\end{equation}
+As it can be seen, there is a singular value that is very close to zero,
+which indicates that there are linearly dependent functions in the library. 
+Looking at the right singular vector corresponding to the small singular value:
+\begin{equation}
+    \bm{v} = \begin{bmatrix}
+    1.4247e-16 \\
+    -4.7779e-17 \\
+    0.7071 \\
+    -0.7071 \\
+    -1.9511e-16 \\
+    -1.3038e-16 \\
+    1.7113e-16 \\
+    2.1797e-16 \\
+    -5.8609e-17 \\
+    1.3930e-16
+    \end{bmatrix}
+\end{equation}
+By the third and fourth term being dominant and everything else being close to zero,
+it can be concluded that the third and fourth functions in the library are linearly dependent.
+After throwing out one of them and recalculating the coefficients, the following governing equation was identified:
+\begin{equation}
+    a = -4 \cdot s - 0.8 \cdot v
+\end{equation}
+Which is the true governing equation of the system. This shows that by using SVD, the
+linearly dependent functions in the library can be identified and thrown out, 
+making the regression problem solvable and the correct governing equation identifiable.\par
+
+Concluding the results for the spring-mass-damper system, it can be said that SINDy was 
+able to successfully identify the governing equation of the system from noisy measurement 
+data, and that smoothing the data before numerical differentiation can significantly improve 
+the results. It was also shown that the choice of the candidate functions in the library is 
+very important, and linearly dependent functions should be avoided, otherwise the regression 
+problem cannot be solved. By using SVD, the linearly dependent functions can be identified 
+and thrown out, making the regression problem solvable and the correct governing equation 
+identifiable.\par
+
+\section{Ball Drop}
+The next system investigated was a falling ball with nonlinear aerodynamic drag. The ideal
+model is once again derived from Newton's second law:
+\begin{equation}
+    F = m \cdot a
+\end{equation}
+The forces acting on the ball is the gravitational force and the drag force:
+\begin{equation}
+    - \frac{1}{2} \cdot \rho \cdot C_d \cdot A \cdot v^2 + m \cdot g = m \cdot a
+\end{equation}
+When we learns basic physics, we usually interpret the drag coefficient $C_d$ as a constant, 
+but in reality it is not, it is a function of the Reynolds number, 
+which is a function of the velocity. There are many levels of complexity to describe 
+the drag force, but I chose the following equation in this project \cite{DragCoefficient}:
+\begin{equation}
+    C_d(Re) = \frac{24}{Re} + \frac{2.6 \frac{Re}{5.0}}{1 + \left(\frac{Re}{5.0}\right)^{1.52}} + \frac{0.411 \left(\frac{Re}{2.63 \cdot 10^5}\right)^{-7.94}}{1 + \left(\frac{Re}{2.63 \cdot 10^5}\right)^{-8.00}} + \frac{0.25 \left(\frac{Re}{10^6}\right)}{1 + \left(\frac{Re}{10^6}\right)}
+\end{equation}
+Where the Reynolds number is calculated as:
+\begin{equation}
+    Re(v) = \frac{\rho \cdot v \cdot d}{\mu}
+\end{equation}
+Where $\rho$ is the density of the medium, $v$ is the velocity of the ball,
+$d$ is the diameter of the ball, and $\mu$ is the dynamic viscosity of the fluid.\par
+
+The characteristic of the drag coefficient is shown in Figure \ref{fig:drag-coefficient}.\par
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{drag_coefficient.png}
+    \caption{Drag coefficient as a function of the Reynolds number \cite{DragCoefficient}}
+    \label{fig:drag-coefficient}
+\end{figure}
+
+So the governing equation of the system looks like:
+\begin{equation}
+    a = - \frac{1}{2} \cdot \rho \cdot C_d(Re(v)) \cdot A \cdot v^2 / m + g
+\end{equation}
+
+The parameters, initial conditions and simulation settings for the system were:
+
+\begin{itemize}
+    \item Mass $m = 0.045359$ [kg]
+    \item Diameter $d = 0.021963 \cdot 2$ [m]
+    \item Density of the medium $\rho = 1.225$ [kg/m$^3$]
+    \item Dynamic viscosity of the fluid $\mu = 1.81 \cdot 10^{-5}$ [kg/(m$\cdot$ s)]
+    \item Initial position $s(1) = 0$ [m]
+    \item Initial velocity $v(1) = 0$ [m/s]
+    \item Simulation time $t = 0$ to $30$ [seconds] with a time step of $\frac{1}{15}$ [seconds]
+    \item Gravitational acceleration $g = 9.81$ [m/s$^2$]
+\end{itemize}
+
+The acceleration, velocity and position of the ideal system visually can be seen in Figure \ref{fig:ball-drop-ideal}.\par
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{ball_drop_ideal.png}
+    \caption{Simulated ideal position, velocity, and acceleration data for the falling ball system}
+    \label{fig:ball-drop-ideal}
+\end{figure}
+
+The next step is to define a library of candidate functions for SINDy to identify
+the governing equation with. The library is the following:
+\begin{equation}
+    \bm{\Theta} = \begin{bmatrix}
+    1 & v & s & vs & v^2 & s^2 & s^2v & sv^2 & s^3 & v^3
+    \end{bmatrix}
+\end{equation}
+This library should be normalized with the RMS of eact column for the coefficiients to be
+indicators. After nomralizing, as a lesson learns, the SVD of the library matrix should be
+examined to make sure there are no linearly dependent functions. The singular
+values of the library matrix are:
+\begin{equation}
+    \sigma = \begin{bmatrix}
+    63.5443 \\
+    20.6636 \\
+    5.7834 \\
+    3.2733 \\
+    0.9206 \\
+    0.3282 \\
+    0.0953 \\
+    0.0153 \\
+    0.0009 \\
+    0.0002
+    \end{bmatrix}
+\end{equation}
+As it can be seen, there are several very small singular values, which is and indicator
+that there are linearly dependent functions of the library. The right singular
+vector corresponding to the smallest singular value is:
+\begin{equation}
+    \bm{v} = \begin{bmatrix}
+    0.00006 \\
+    -0.00091 \\
+    0.31734 \\
+    -0.47746 \\
+    -0.02456 \\
+    -0.56658 \\
+    0.56936 \\
+    0.15756 \\
+    -0.00104 \\
+    0.02613 \\
+    \end{bmatrix}
+\end{equation}
+It can be seen that the third, fourth, sixth and seventh terms are dominant, 
+which indicates that they are linearly dependent. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \newpage
-\printbibliography
+\printbibliography[title={References}]
 
 \end{document}
 

@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber GavallerDavid_ES02RO_ProjectLaboratory1"] 1778621671.64623 "GavallerDavid_ES02RO_ProjectLaboratory1.bcf" "GavallerDavid_ES02RO_ProjectLaboratory1.bbl" "GavallerDavid_ES02RO_ProjectLaboratory1" 1778621753.58507 0
-  "GavallerDavid_ES02RO_ProjectLaboratory1.bcf" 1778621753 108618 14f582442f5b384a8e6739b54fd1ec8b "pdflatex"
-  "references.bib" 1778593527 535 fcc09bf2c66b2348901877eace6a8a2a ""
+["biber GavallerDavid_ES02RO_ProjectLaboratory1"] 1778705837.78462 "GavallerDavid_ES02RO_ProjectLaboratory1.bcf" "GavallerDavid_ES02RO_ProjectLaboratory1.bbl" "GavallerDavid_ES02RO_ProjectLaboratory1" 1778707345.89905 0
+  "GavallerDavid_ES02RO_ProjectLaboratory1.bcf" 1778707345 108758 5b518e1e8d1645d51aab76acd72d1f52 "pdflatex"
+  "references.bib" 1778704954 868 448b66eb091cf05c5412a3c72ef3aadd ""
   (generated)
   "GavallerDavid_ES02RO_ProjectLaboratory1.bbl"
   "GavallerDavid_ES02RO_ProjectLaboratory1.blg"
   (rewritten before read)
-["pdflatex"] 1778621750.9955 "c:/Users/gaval/Documents/GitHub/MSc/Felev1/Onlab1/Documentation/GavallerDavid_ES02RO_ProjectLaboratory1.tex" "GavallerDavid_ES02RO_ProjectLaboratory1.pdf" "GavallerDavid_ES02RO_ProjectLaboratory1" 1778621753.58614 0
+["pdflatex"] 1778707343.51295 "c:/Users/gaval/Documents/GitHub/MSc/Felev1/Onlab1/Documentation/GavallerDavid_ES02RO_ProjectLaboratory1.tex" "GavallerDavid_ES02RO_ProjectLaboratory1.pdf" "GavallerDavid_ES02RO_ProjectLaboratory1" 1778707345.90001 0
   "C:/Users/gaval/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1778592848 80937 91001db6d4ae332437b4b739862cda02 ""
   "C:/Users/gaval/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecbx1095.pk" 1778595297 28976 ba1411a7085087e57ef4ce6d6f268d2d ""
   "C:/Users/gaval/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecbx1440.pk" 1730571911 40136 a61f0d1c1e349e56421e36098023f974 ""
@@ -66,6 +66,7 @@
   "C:/Users/gaval/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb" 1247596666 35469 dcf3a5f2fc1862f5952e3ee5eb1d98c4 ""
   "C:/Users/gaval/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmib10.pfb" 1247596666 36912 b448ef9ad9d7228ec3c6e71005136d55 ""
   "C:/Users/gaval/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb" 1247596667 32722 d7379af29a190c3f453aba36302ff5a9 ""
+  "C:/Users/gaval/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb" 1247596667 32734 69e00a6b65cedb993666e42eedb3d48f ""
   "C:/Users/gaval/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb" 1247596667 32726 39f0f9e62e84beb801509898a605dbd5 ""
   "C:/Users/gaval/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1247596667 32569 5e5ddc8df908dea60932f3c484a54c0d ""
   "C:/Users/gaval/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb" 1247596667 32626 5abc8bb2f28aa647d4c70f8ea38cc0d3 ""
@@ -283,13 +284,20 @@
   "C:/Users/gaval/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/gaval/AppData/Local/Programs/MiKTeX/tex/latex/wrapfig/wrapfig.sty" 1044403200 26220 3701aebf80ccdef248c0c20dd062fea9 ""
   "C:/Users/gaval/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
-  "GavallerDavid_ES02RO_ProjectLaboratory1.aux" 1778621753 2048 e1ce0961e4fab1732f71fa5ab78de4b7 "pdflatex"
-  "GavallerDavid_ES02RO_ProjectLaboratory1.bbl" 1778621675 2797 099b7ac1628fc59c0f56268670e00e3b "biber GavallerDavid_ES02RO_ProjectLaboratory1"
-  "GavallerDavid_ES02RO_ProjectLaboratory1.out" 1778621753 816 6db8380ddb898d0a734728e16df30f8f "pdflatex"
-  "GavallerDavid_ES02RO_ProjectLaboratory1.run.xml" 1778621753 2550 313eca40d0d3a92b20929bc21b86aa23 "pdflatex"
-  "GavallerDavid_ES02RO_ProjectLaboratory1.tex" 1778621750 14231 c89d2176b72fdc343d9479bfeb1da621 ""
-  "c:/Users/gaval/Documents/GitHub/MSc/Felev1/Onlab1/Documentation/GavallerDavid_ES02RO_ProjectLaboratory1.tex" 1778621750 14231 c89d2176b72fdc343d9479bfeb1da621 ""
+  "GavallerDavid_ES02RO_ProjectLaboratory1.aux" 1778707345 4869 f2ba569e8fe617d88584716c519f88eb "pdflatex"
+  "GavallerDavid_ES02RO_ProjectLaboratory1.bbl" 1778705840 4135 eb557f00403e0ee40c71a445d230758d "biber GavallerDavid_ES02RO_ProjectLaboratory1"
+  "GavallerDavid_ES02RO_ProjectLaboratory1.out" 1778707345 907 c2f0fa343a8ff5a5b60480d7e73ee120 "pdflatex"
+  "GavallerDavid_ES02RO_ProjectLaboratory1.run.xml" 1778707345 2550 313eca40d0d3a92b20929bc21b86aa23 "pdflatex"
+  "GavallerDavid_ES02RO_ProjectLaboratory1.tex" 1778707341 27696 3694c3d6059c57baed478924b61a8314 ""
+  "ball_drop_ideal.png" 1778705654 35420 c34707b35084e007bf63792509921ccc ""
+  "c:/Users/gaval/Documents/GitHub/MSc/Felev1/Onlab1/Documentation/GavallerDavid_ES02RO_ProjectLaboratory1.tex" 1778707341 27696 3694c3d6059c57baed478924b61a8314 ""
+  "drag_coefficient.png" 1778705017 109391 1f87777a6abc80fc00230589517d849f ""
   "spring_mass_data.png" 1778618998 25585 f1a4cfdc6ec40ac1876c792f4c8cb412 ""
+  "spring_mass_identified_equation.png" 1778692858 52982 54b3dd10b34393cae62fa3902a1188eb ""
+  "spring_mass_identified_equation_noisy.png" 1778693326 168687 35a11d8818a3da00f08b1e3c8ad8934b ""
+  "spring_mass_identified_equation_smoothed.png" 1778694086 57404 5448eb30fe03210416489e51aa1c4551 ""
+  "spring_mass_identified_equation_smoothed_very_noisy.png" 1778694444 73006 1e60c9a71202e8cd9d9abf64832e8be9 ""
+  "spring_mass_identified_equation_very_noisy.png" 1778693809 245994 bdc7de35b2013509ec8201e5473cdd0d ""
   "spring_mass_noisy_data.png" 1778619836 35650 9ec7addcf90ac0da3d3f7116db471544 ""
   "viklogo.jpeg" 1778590007 79036 571ade254b6eac4a2bb80a554bcf3024 ""
   (generated)

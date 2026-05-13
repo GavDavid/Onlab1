@@ -71,6 +71,35 @@
       \verb http://dx.doi.org/10.1073/pnas.1517384113
       \endverb
     \endentry
+    \entry{DragCoefficient}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=4a9e9103d0fb64c5c2a778704920694b}{%
+           family={Morrison},
+           familyi={M\bibinitperiod},
+           given={Faith\bibnamedelima A.},
+           giveni={F\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Houghton, MI 49931}%
+      }
+      \strng{namehash}{4a9e9103d0fb64c5c2a778704920694b}
+      \strng{fullhash}{4a9e9103d0fb64c5c2a778704920694b}
+      \strng{fullhashraw}{4a9e9103d0fb64c5c2a778704920694b}
+      \strng{bibnamehash}{4a9e9103d0fb64c5c2a778704920694b}
+      \strng{authorbibnamehash}{4a9e9103d0fb64c5c2a778704920694b}
+      \strng{authornamehash}{4a9e9103d0fb64c5c2a778704920694b}
+      \strng{authorfullhash}{4a9e9103d0fb64c5c2a778704920694b}
+      \strng{authorfullhashraw}{4a9e9103d0fb64c5c2a778704920694b}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Technical report, Department of Chemical Engineering, Michigan Technological University}
+      \field{month}{11}
+      \field{note}{10 November 2016}
+      \field{title}{Data Correlation for Drag Coefficient for Sphere}
+      \field{year}{2016}
+    \endentry
   \enddatalist
 \endrefsection
 \endinput
