@@ -100,6 +100,59 @@
       \field{title}{Data Correlation for Drag Coefficient for Sphere}
       \field{year}{2016}
     \endentry
+    \entry{BallDropExperiment}{article}{}{}
+      \name{author}{4}{}{%
+        {{hash=3a617dd71a854ae769670d134794c423}{%
+           family={Silva},
+           familyi={S\bibinitperiod},
+           given={Brian\bibnamedelima M.},
+           giveni={B\bibinitperiod\bibinitdelim M\bibinitperiod},
+           prefix={de},
+           prefixi={d\bibinitperiod}}}%
+        {{hash=a6816b7354705adc59a9bf07891167b7}{%
+           family={Higdon},
+           familyi={H\bibinitperiod},
+           given={David\bibnamedelima M.},
+           giveni={D\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=572af75cb67759c9684ffbb4d11cddf8}{%
+           family={Brunton},
+           familyi={B\bibinitperiod},
+           given={Steven\bibnamedelima L.},
+           giveni={S\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=39878c41ca2338687a0064bcc2ba2922}{%
+           family={Kutz},
+           familyi={K\bibinitperiod},
+           given={J.\bibnamedelimi Nathan},
+           giveni={J\bibinitperiod\bibinitdelim N\bibinitperiod}}}%
+      }
+      \strng{namehash}{87d195859fd80645eca5be2e1b0391ca}
+      \strng{fullhash}{933492e7d533a1e8fa1656481c1fcb1b}
+      \strng{fullhashraw}{933492e7d533a1e8fa1656481c1fcb1b}
+      \strng{bibnamehash}{87d195859fd80645eca5be2e1b0391ca}
+      \strng{authorbibnamehash}{87d195859fd80645eca5be2e1b0391ca}
+      \strng{authornamehash}{87d195859fd80645eca5be2e1b0391ca}
+      \strng{authorfullhash}{933492e7d533a1e8fa1656481c1fcb1b}
+      \strng{authorfullhashraw}{933492e7d533a1e8fa1656481c1fcb1b}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Machine learning (ML) and artificial intelligence (AI) algorithms are now being used to automate the discovery of physics principles and governing equations from measurement data alone. However, positing a universal physical law from data is challenging without simultaneously proposing an accompanying discrepancy model to account for the inevitable mismatch between theory and measurements. By revisiting the classic problem of modeling falling objects of different size and mass, we highlight a number of nuanced issues that must be addressed by modern data-driven methods for automated physics discovery. Specifically, we show that measurement noise and complex secondary physical mechanisms, like unsteady fluid drag forces, can obscure the underlying law of gravitation, leading to an erroneous model. We use the sparse identification of nonlinear dynamics (SINDy) method to identify governing equations for real-world measurement data and simulated trajectories. Incorporating into SINDy the assumption that each falling object is governed by a similar physical law is shown to improve the robustness of the learned models, but discrepancies between the predictions and observations persist due to subtleties in drag dynamics. This work highlights the fact that the naive application of ML/AI will generally be insufficient to infer universal physical laws without further modification.}
+      \field{issn}{2624-8212}
+      \field{journaltitle}{Frontiers in Artificial Intelligence}
+      \field{title}{Discovery of Physics From Data: Universal Laws and Discrepancies}
+      \field{volume}{Volume 3 - 2020}
+      \field{year}{2020}
+      \verb{doi}
+      \verb 10.3389/frai.2020.00025
+      \endverb
+      \verb{urlraw}
+      \verb https://www.frontiersin.org/journals/artificial-intelligence/articles/10.3389/frai.2020.00025
+      \endverb
+      \verb{url}
+      \verb https://www.frontiersin.org/journals/artificial-intelligence/articles/10.3389/frai.2020.00025
+      \endverb
+    \endentry
   \enddatalist
 \endrefsection
 \endinput

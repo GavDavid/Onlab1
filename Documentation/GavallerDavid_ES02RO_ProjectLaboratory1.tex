@@ -82,8 +82,8 @@
 \fancyhf{}
 \fancypagestyle{plain}{\fancyfoot[C]{\thepage. page}}
 
-\title{Discrepancy Learning for Dynamical System Identification}
-\author{DĂˇvid GavallĂ©r }
+\title{Sparse Identification and Discrepancy Learning of Dynamical Systems}
+\author{D\'avid Gavall\'er }
 \date{\today}
 
 \lhead{}
@@ -104,7 +104,8 @@
         {\LARGE\bfseries \thetitle\par}
         \vspace{1.0em}
         {\large \theauthor\\
-        ES02RO\par}
+        ES02RO\\
+        Advisor: Dr. Tam\'as Dab\'oczi\par}
         \vspace{1.0em}
         {\large \thedate\par}
     \end{center}
@@ -116,52 +117,53 @@
 \begin{abstract}
     This document presents an investigation into discrepancy learning methods for nonlinear
     dynamical systems using Sparse Identification of Nonlinear Dynamics (SINDy) and Neural Network
-    based correction models. Several systems were examined, including a linear 
-    spring-mass-damper system, a falling ball with nonlinear aerodynamic drag, and the nonlinear 
-    Van der Pol oscillator. The systems were examined in MATLAB, where simulated measurement
+    based correction models. The systems examined are a linear 
+    spring-mass-damper system and a falling ball with nonlinear aerodynamic drag. The systems were examined in MATLAB, where simulated measurement
     data was generated and used for system identification and discrepancy learning.\par
     
     The objective of the work was to:\par
     
     \begin{enumerate}
         \item Reconstruct governing differential equations from simulated measurement data with SINDy
-        to understand it
-        \item Investigate the effect of measurement noise and numerical differentiation
-        \item Apply sparse regression techniques to identify compact physical models
+        to understand the working principle of SINDy
+        \item Investigate the effect of measurement noise
         \item Introduce artificial discrepancies into physical systems
         \item Learn and compensate these discrepancies using both SINDy and Neural Networks
     \end{enumerate}
     
-    The results demonstrate that SINDy can successfully recover interpretable governing equations, 
-    while discrepancy learning methods estimate and compensate for the difference between the
-    nominal model and the observed system dynamics.
+    The results demonstrate that SINDy can successfully recover interpretable governing equations
+    even with a significant amount of measurement noise, best when the data is smoothed before
+    numerical differentiation.
+    SINDy is also able to estimate the difference between the nominal model and the
+    observed system. While Neural Networks can also learn the discrepancy, 
+    they do not provide an easily interpretable model like SINDy does.
 \end{abstract}
     
 \section{Introduction}
 Dynamic systems are traditionally modeled using first principles physics equations
 derived from fundamental laws. However, these models often fail to capture all the
-complexities of real-world systems because of numerous reasons:
+complexities of real world systems because of several reasons:
 \begin{itemize}
     \item Simplifications
     \item Aging effects
-    \item Unknown physical phenomenas
+    \item Unknown physical phenomena
 \end{itemize}
 This leads to discrepancies between model predictions and observed behavior.
 Discrepancy learning methods aim to bridge this gap by learning 
 the difference between the nominal model and the true system dynamics from data.\par
 
-Data-driven system identification methods aim to reconstruct system dynamics directly
+Data driven system identification methods aim to reconstruct system dynamics directly
 from measured data. One important approach is Sparse Identification of Nonlinear Dynamics
 (SINDy) \cite{SINDy2016}, which identifies governing equations using a predefined
 function library. The core assumption behind SINDy is that physical systems can be represented compactly 
 using a set of candidate functions.\par
 
-In addition to direct system identification, SINDy can be used for discrepancy learning by modeling
+As it is similar to direct system identification, SINDy can be used for discrepancy learning by modeling
 the difference between a nominal model and observed dynamics alongside Neural Networks.\par
 
 This project investigates the possibilities with SINDy for both system identification and
-discrepancy learning on several example systems, including a linear spring-mass-damper system,
-a falling ball with nonlinear drag, and the Van der Pol oscillator. Also, the results achieved
+discrepancy learning on two example systems: a linear spring-mass-damper system and a
+a falling ball with nonlinear drag. Also, the results achieved
 with SINDy are compared to those obtained using Neural Networks for discrepancy learning.\par
 
 \newpage
@@ -179,7 +181,7 @@ The time evolution of a dynamical system is generally expressed as:
 where $\bm{x}(t)$ is the state vector at time $t$ and $\bm{f}$ is the function describing
 the system dynamics.\par
 
-In order to determine $\bm{f}$, from data, measurements of $\bm{x}(t)$, and if possible,
+In order to determine $\bm{f}$ from data, measurements of $\bm{x}(t)$, and if possible,
 measurements of $\dot{\bm{x}}(t)$ are collected.
 The time derivates can also be estimated from the state measurements using numerical
 differentiation techniques.\par
@@ -215,7 +217,7 @@ This gives the following two matrices:
 \end{equation}
 
 Next, a library of candidate functions $\bm{\Theta}(\bm{X})$ is constructed, which includes
-various nonlinear functions of the state variables. For example, the library may include:
+various combinations and functions of the state variables. For example, the library may include:
 \begin{equation}   
     \bm{\Theta}(\bm{X}) = \begin{bmatrix}
     1 & \bm{x}_1 & \bm{x}_2 & \cdots & \bm{x}_n & \bm{x}_1^2 & \cdots & \bm{x}_n^2 &
@@ -227,7 +229,8 @@ and it is important to include functions that are relevant to the system being s
 based on prior knowledge.\par
 
 To determine the active functions in the library, a regression problem is set up to
-determine the vectors of coefficients $\bm{\Xi}$ such that:
+determine the coefficient ($\bm{\Xi}$) for each candidate function in the library, 
+such that the following equation is satisfied:
 \begin{equation}
     \dot{\bm{X}} \approx \bm{\Theta}(\bm{X})\bm{\Xi}
 \end{equation}
@@ -240,7 +243,7 @@ The least-squares solution to this problem is given by:
 To promote sparsity in the solution, a thresholding step is applied to
 set small coefficients to zero, then the coefficient are recalculated
 using only the remaining active functions. This process is repeated until there is
-no change in the active functions.\par
+no change in the active functions and the wanted sparsity is reached.\par
 
 \section{Spring-Mass-Damper System}
 The first system investigated was a simple linear spring-mass-damper system,
@@ -277,7 +280,7 @@ The system is illustrated in Figure \ref{fig:spring-mass}.\par
         \draw[thick, ->] (-0.5,-0.5) -- (3.5,-0.5);
         \node[below] at (3.5,-0.5) {$s$};
     \end{tikzpicture}
-    \caption{Mass-spring-damper system}
+    \caption{Spring-mass-damper system}
     \label{fig:spring-mass}
 \end{figure}
 
@@ -311,25 +314,24 @@ The chosen parameters, initial conditions and simulation settings were:
 
 \newpage
 
-The plot of the idealsimulated position, velocity and acceleration data is shown
+The plot of the ideal simulated position, velocity and acceleration data is shown
 in Figure \ref{fig:spring-mass-data}.\par
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{spring_mass_data.png}
-    \caption{Simulated ideal position, velocity, and acceleration data for the spring-mass-damper system}
+    \caption{Ideal position, velocity, and acceleration data for the spring-mass-damper system}
     \label{fig:spring-mass-data}
 \end{figure}
 
 Next, noise was added to the position data (gaussian with a noise level of 0.00001)
-to simulate measurement noise, the velocity and
+to simulate measurement noise. The velocity and
 acceleration were estimated from the noisy position data using the diff() function, 
-which calculates the difference between consecutive elements.The same principle was applied 
-to the velocity data to estimate the acceleration. The resultsare shown in
+which calculates the difference between consecutive elements. The results are shown in
 Figure \ref{fig:spring-mass-noisy-data}.\par 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{spring_mass_noisy_data.png}
-    \caption{Simulated noisy position, velocity, and acceleration data for the spring-mass-damper system}
+    \caption{Noisy position, velocity, and acceleration data for the spring-mass-damper system}
     \label{fig:spring-mass-noisy-data}
 \end{figure}
 As it can be seen, even this little noise becomes singificant in the acceleration data,
@@ -344,11 +346,11 @@ A library of candidate functions was constructed:
 \end{equation}
 
 The library was normalized with the RMS of each column for the $\bm{\Xi}$ coefficients to be
-comparable, and the regression was applied to determine the coefficients for each 
+comparable, and the regression problem was solved to determine the coefficients for each 
 candidate function.\par
 
 This way, the results for $\bm{\Xi}$ are the following 
-(of course, the results may differ on each run because of the noise):
+(of course, the results may differ on each run because of the random noise):
 
 \begin{equation}
     \bm{\Xi} = \begin{bmatrix}
@@ -366,7 +368,7 @@ This way, the results for $\bm{\Xi}$ are the following
 \end{equation}  
 
 Since these coefficients are not sparse, a thresholding step was applied to set small
-coefficients to zero, then the coefficient were recalculated. Choosing a threshold of 0.01 
+coefficients to zero, then the coefficients were recalculated. Choosing a threshold of 0.01 
 and doing multiple iterations of this process, the final result was:
 \begin{equation}
     \bm{\Xi} = \begin{bmatrix}
@@ -383,7 +385,7 @@ and doing multiple iterations of this process, the final result was:
     \end{bmatrix}
 \end{equation}
 
-These are not the final results, since the library was normalized,
+These are not the final results, since the $\bm{\Theta}$ library was normalized,
 the coefficients need to be denormalized. After denormalization, the final results are:
 \begin{equation}
     \bm{\Xi} = \begin{bmatrix}
@@ -403,12 +405,12 @@ This means that the identified governing equation is:
 \begin{equation}
     a = -3.9972 \cdot s - 0.8011 \cdot v
 \end{equation}
-This is very close to the true governing equation, which is:
+This is very close to the ideal governing equation, which is:
 \begin{equation}
     a = -4 \cdot s - 0.8 \cdot v
 \end{equation}
-As can be seen, the identification was successful and the coefficients are very close to the
-true values. Visual representation of the results is shown in Figure \ref{fig:spring-mass-identified-equation}.\par
+As it can be seen, the identification was successful and the coefficients are very close to the
+ideal values. Visual representation of the results is shown in Figure \ref{fig:spring-mass-identified-equation}.\par
 
 \begin{figure}[H]
     \centering
@@ -418,17 +420,17 @@ true values. Visual representation of the results is shown in Figure \ref{fig:sp
 \end{figure}
 
 The position and velocity values were calculated with forward Euler integration
-using the identified governing equation\par
+using the identified governing equation.\par
 
-After this, the same process was repeated with a higher noise level of 0.0001,
+After this, the same process was repeated with a noise level of 0.0001,
 which is 10 times higher than before.
 The results were not as good as before and the thresholding value had to be
-adjusted to achieve a sparse solution, but still the identification was successful and
+increased to achieve a sparse solution, but still the identification was successful and
 the identified governing equation was:
 \begin{equation}
     a = -4.0957 \cdot s - 0.9786 \cdot v
 \end{equation}
-This is still close to the true governing equation, but the coefficients are not
+This is still close to the ideal governing equation, but the coefficients are not
 as accurate as before. Visual representation of the results is shown in
 Figure \ref{fig:spring-mass-identified-equation-noisy}.\par       
 \begin{figure}[H]
@@ -437,9 +439,9 @@ Figure \ref{fig:spring-mass-identified-equation-noisy}.\par
     \caption{Identified governing equation for the spring-mass-damper system with higher noise level}
     \label{fig:spring-mass-identified-equation-noisy}
 \end{figure}  
-By increasing the noise level even more to 0.001, the results completely got out of hand,
-by adjusting the thresholding value (to 4.5), a sparse solution could be achieved, but the identified
-governing equation was very far from the true one:
+By increasing the noise level even more to 0.001, the results completely became unstable.
+By adjusting the thresholding value (to 4.5), a sparse solution could be achieved, but the identified
+governing equation was very far from the ideal one:
 \begin{equation}
     a = - 31.2664 \cdot v + 13.373877 \cdot v^3
 \end{equation}
@@ -453,7 +455,7 @@ Visual representation of the results is shown in Figure \ref{fig:spring-mass-ide
 
 To overcome this issue, instead of using the diff() function for numerical differentiation,
 a more robust method was used, first applying a Savitzky-Golay filter to the noisy position 
-data to smooth it, then apply the gradient() function, because it calculates the numerical 
+data to smooth it, then applying the gradient() function, because it calculates the numerical 
 derivative using central differences, which is more accurate and less sensitive to noise than 
 the diff() function. The parameters for the Savitzky-Golay filter were a window size of 21
 and a polynomial order of 3. With only this much change, the results got much better. 
@@ -480,7 +482,7 @@ Which can be considered very impressive by looking at the visualisation of the r
     \label{fig:spring-mass-identified-equation-smoothed-very-noisy}
 \end{figure}
 
-Now that it is proven that smooting the data before numerical differentiation
+Now that it is proven that smoothing the data before numerical differentiation
 can significantly improve the results, making it more robust to noise, the 
 next step was to test the effect of the choice of the candidate functions in the library.  
 What happens if the functions in the library are linearly dependent? Intuition says that
@@ -500,7 +502,7 @@ does not exist, so the regression problem cannot be solved. This shows that
 the choice of the candidate functions in the library is very important, and linearly dependent
 functions should be avoided, otherwise the regression problem cannot be solved.\par
 A way to avoid this happening is throwing out one of the linearly dependent functions. 
-But of course, it is now always obvious which functions are linearly dependent.
+But of course, it is not always obvious which functions are linearly dependent.
 A way to determine the linearly dependent functions is through Singular Value
 Decomposition (SVD) of the library matrix $\bm{\Theta}$. The singular values of the matrix
 can be examined, and if there are any singular values that are close to zero, it indicates 
@@ -509,7 +511,7 @@ singular vectors corresponding to the small singular values, the linearly depend
 can be identified.\par 
 The singular values of the library matrix shown in equation (20) are:
 \begin{equation}
-    \sigma = \begin{bmatrix}
+    \bm{\sigma} = \begin{bmatrix}
     90.6002 \\
     54.3295 \\
     40.3114 \\
@@ -519,7 +521,7 @@ The singular values of the library matrix shown in equation (20) are:
     12.7127 \\
     8.36104 \\
     5.06999 \\
-    6.32417e-15
+    6.32417\cdot10^{-15}
     \end{bmatrix}
 \end{equation}
 As it can be seen, there is a singular value that is very close to zero,
@@ -527,19 +529,19 @@ which indicates that there are linearly dependent functions in the library.
 Looking at the right singular vector corresponding to the small singular value:
 \begin{equation}
     \bm{v} = \begin{bmatrix}
-    1.4247e-16 \\
-    -4.7779e-17 \\
+    1.4247\cdot10^{-16} \\
+    -4.7779\cdot10^{-17} \\
     0.7071 \\
     -0.7071 \\
-    -1.9511e-16 \\
-    -1.3038e-16 \\
-    1.7113e-16 \\
-    2.1797e-16 \\
-    -5.8609e-17 \\
-    1.3930e-16
+    -1.9511\cdot10^{-16} \\
+    -1.3038\cdot10^{-16} \\
+    1.7113\cdot10^{-16} \\
+    2.1797\cdot10^{-16} \\
+    -5.8609\cdot10^{-17} \\
+    1.3930\cdot10^{-16}
     \end{bmatrix}
 \end{equation}
-By the third and fourth term being dominant and everything else being close to zero,
+By the third and fourth term being dominant, their sum being zero and everything else being close to zero,
 it can be concluded that the third and fourth functions in the library are linearly dependent.
 After throwing out one of them and recalculating the coefficients, the following governing equation was identified:
 \begin{equation}
@@ -551,24 +553,46 @@ making the regression problem solvable and the correct governing equation identi
 
 Concluding the results for the spring-mass-damper system, it can be said that SINDy was 
 able to successfully identify the governing equation of the system from noisy measurement 
-data, and that smoothing the data before numerical differentiation can significantly improve 
+data and that smoothing the data before numerical differentiation can significantly improve 
 the results. It was also shown that the choice of the candidate functions in the library is 
 very important, and linearly dependent functions should be avoided, otherwise the regression 
 problem cannot be solved. By using SVD, the linearly dependent functions can be identified 
 and thrown out, making the regression problem solvable and the correct governing equation 
 identifiable.\par
 
-\section{Ball Drop}
+\section{Ball Drop \cite{BallDropExperiment}}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[scale=1]
+        % Ball
+        \filldraw[fill=gray!20, draw=black] (0,0) circle (0.4cm);
+        % Drag force arrow upward
+        \draw[->, thick] (0,0.4) -- (0,2.0) node[midway,right] {$F_d$};
+        % Gravity arrow downward
+        \draw[->, thick] (0,-0.4) -- (0,-2.0) node[midway,right] {$m g$};
+        % Ground with diagonal hatch
+        \draw[black] (-1.5,-2.3) -- (1.7,-2.3);
+        \foreach \x in {-1.4,-1.2,-1.0,-0.8,-0.6,-0.4,-0.2,0.0,0.2,0.4,0.6,0.8,1.0,1.2,1.4} {
+            \draw[black] (\x,-2.5) -- (\x+0.2,-2.3);
+        }
+    \end{tikzpicture}
+    \caption{Ball Drop System}
+\end{figure}
+
+
+\subsection{SINDy}
 The next system investigated was a falling ball with nonlinear aerodynamic drag. The ideal
 model is once again derived from Newton's second law:
 \begin{equation}
     F = m \cdot a
 \end{equation}
-The forces acting on the ball is the gravitational force and the drag force:
+The forces acting on the ball are the gravitational force and the drag force:
 \begin{equation}
     - \frac{1}{2} \cdot \rho \cdot C_d \cdot A \cdot v^2 + m \cdot g = m \cdot a
 \end{equation}
-When we learns basic physics, we usually interpret the drag coefficient $C_d$ as a constant, 
+
+When learning basic physics, we usually interpret the drag coefficient $C_d$ as a constant, 
 but in reality it is not, it is a function of the Reynolds number, 
 which is a function of the velocity. There are many levels of complexity to describe 
 the drag force, but I chose the following equation in this project \cite{DragCoefficient}:
@@ -599,7 +623,7 @@ The parameters, initial conditions and simulation settings for the system were:
 
 \begin{itemize}
     \item Mass $m = 0.045359$ [kg]
-    \item Diameter $d = 0.021963 \cdot 2$ [m]
+    \item Diameter $d = 0.0439$ [m]
     \item Density of the medium $\rho = 1.225$ [kg/m$^3$]
     \item Dynamic viscosity of the fluid $\mu = 1.81 \cdot 10^{-5}$ [kg/(m$\cdot$ s)]
     \item Initial position $s(1) = 0$ [m]
@@ -612,7 +636,7 @@ The acceleration, velocity and position of the ideal system visually can be seen
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{ball_drop_ideal.png}
-    \caption{Simulated ideal position, velocity, and acceleration data for the falling ball system}
+    \caption{Ideal position, velocity, and acceleration data for the falling ball system}
     \label{fig:ball-drop-ideal}
 \end{figure}
 
@@ -623,12 +647,12 @@ the governing equation with. The library is the following:
     1 & v & s & vs & v^2 & s^2 & s^2v & sv^2 & s^3 & v^3
     \end{bmatrix}
 \end{equation}
-This library should be normalized with the RMS of eact column for the coefficiients to be
-indicators. After nomralizing, as a lesson learns, the SVD of the library matrix should be
+This library should be normalized with the RMS of each column for the coefficiients to be
+indicators. After normalizing, as a lesson learnt, the SVD of the library matrix should be
 examined to make sure there are no linearly dependent functions. The singular
 values of the library matrix are:
 \begin{equation}
-    \sigma = \begin{bmatrix}
+    \bm{\sigma} = \begin{bmatrix}
     63.5443 \\
     20.6636 \\
     5.7834 \\
@@ -642,7 +666,7 @@ values of the library matrix are:
     \end{bmatrix}
 \end{equation}
 As it can be seen, there are several very small singular values, which is and indicator
-that there are linearly dependent functions of the library. The right singular
+that there are linearly dependent functions in the library. The right singular
 vector corresponding to the smallest singular value is:
 \begin{equation}
     \bm{v} = \begin{bmatrix}
@@ -659,19 +683,349 @@ vector corresponding to the smallest singular value is:
     \end{bmatrix}
 \end{equation}
 It can be seen that the third, fourth, sixth and seventh terms are dominant, 
-which indicates that they are linearly dependent. 
+which indicates that they are linearly dependent. Because the functions
+in the library are gradually getting more complex and higher order,
+but they are about the same value,
+the latter ones should be thrown out first. After throwing out the seventh
+function which is $s^2v$ and recalculating the SVD, the singular values are:
+\begin{equation}
+    \bm{\sigma} = \begin{bmatrix}
+    60.3448 \\
+    19.3084 \\
+    5.7510 \\
+    3.2733 \\
+    0.9057 \\
+    0.2734 \\
+    0.0942 \\
+    0.0152 \\
+    0.0008 \\
+    \end{bmatrix}
+\end{equation}
 
 
 
 
+There are still some small singular values, so the right singular vector 
+corresponding to the smallest singular value is examined again:
+\begin{equation}
+    \bm{v} = \begin{bmatrix}
+    -0.0002 \\
+    -0.0046 \\
+    0.4831 \\
+    -0.8099 \\
+    -0.0233 \\
+    -0.0042 \\
+    0.3307 \\
+    0.0017 \\
+    0.0259 \\
+    \end{bmatrix}
+\end{equation}
+The third, fourth and seventh terms are dominant, so based on the same considerations as before,
+but the fourth term being a way bigger value than the others,
+the fourth function which is $vs$ is thrown out. After throwing out the fourth function
+and recalculating the SVD, the singular values are: 
+\begin{equation}
+    \bm{\sigma} = \begin{bmatrix}
+    56.6156 \\
+    19.0128 \\
+    5.5560 \\
+    3.0681 \\
+    0.9057 \\
+    0.2681 \\
+    0.0939 \\
+    0.0151
+    \end{bmatrix}
+\end{equation}
 
+Now that there are no particularly small singular values, the regression problem 
+can be solved to determine the coefficients:
+\begin{equation}
+    \bm{\Xi} = \begin{bmatrix}
+        9.8078 \\
+        0.0280 \\
+         -0.3781 \\
+                 0 \\   
+         -8.5878 \\
+            0.0242 \\
+                    0 \\
+            0.3563 \\
+              -0.0096 \\
+                -0.4507
+    \end{bmatrix}
+\end{equation}
+Since this solution is not sparse, a thresholding step is applied just
+like before with the spring-mass-damper system. After applying a threshold
+of 0.4, doing multiple iterations of this process and denormalizing at the end, 
+the final result is:
+\begin{equation}
+    \bm{\Xi} = \begin{bmatrix}
+        9.8654 \\
+        0 \\
+        0 \\
+        0 \\   
+        -0.0083 \\
+        0 \\
+        0 \\
+        0 \\
+        0 \\
+        0
+    \end{bmatrix}
+\end{equation}
+This means that the identified governing equation is:
+\begin{equation}
+    a = 9.8654 - 0.0083 \cdot v^2
+\end{equation}
 
+The results visually represented are shown in Figure \ref{fig:ball-drop-identified-equation}.
+The velocity and position values are once again calculated with forward Euler integration. 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{ball_drop_identified_equation.png}
+    \caption{Identified governing equation for the falling ball system}
+    \label{fig:ball-drop-identified-equation}
+\end{figure}
+As it can be seen, the identified governing equation is actually very close
+to the true governing equation despite the fact that the drag coefficient
+was described with a very complex function.
 
+\newpage
 
+Next, noise was added to the position data (gaussian with a noise level of 0.1),
+to simulate measurement noise. As a lesson learnt from the spring-mass-damper 
+system, the data was smoothed with a Savitzky-Golay filter before numerical 
+differentiation. The parameters for the Savitzky-Golay filter were a window size 
+of 21 and a polynomial order of 3. Despite all these efforts, the sparse solution
+could only be reached with a very high thresholding value of 20, and the 
+coefficients looked like this:
+\begin{equation}
+    \bm{\Xi} = \begin{bmatrix}
+         0 \\
+         0 \\
+    0.2349 \\
+         0 \\
+         0 \\
+         0 \\
+         0 \\
+   -0.0002 \\
+         0 \\
+         0 \\
+    \end{bmatrix}
+\end{equation}
+This means that the identified governing equation is:
+\begin{equation}
+    a = 0.2349 \cdot s - 0.0002 \cdot s \cdot v^2
+\end{equation}
+The results visually represented are shown in Figure \ref{fig:ball-drop-identified-equation-noisy}.\par
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{ball_drop_identified_equation_noisy.png}
+    \caption{Identified governing equation for the falling ball system with noisy data}
+    \label{fig:ball-drop-identified-equation-noisy}
+\end{figure}
+As it can be seen, the identified governing equation is very far off
+from the true governing equation, and the results are very bad. 
+To find a solution to this issue, I introduced a regularization term to
+the Moore-Penrose pseudo inverse used to solve the regression problem:
+\begin{equation}
+    \bm{\Xi} = (\bm{\Theta}^T\bm{\Theta} + \lambda \cdot \bm{I})^{-1}\bm{\Theta}^T\dot{\bm{X}}
+\end{equation}
 
+This regularization term improves numerical stability by reducing the
+sensitivity to small singular values, which is especially important in the presence of noise.
 
+After playing around with the value of $\lambda$ and the thresholding value,
+I got the best results with $\lambda = 1$ and a thresholding value of 4.
+The following governing equation was identified:
+\begin{equation}
+    a = 8.6248 - 0.0002 \cdot v^3
+\end{equation}
+The results visually represented are shown in Figure \ref{fig:ball-drop-identified-equation-regularized}.\par
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{ball_drop_identified_equation_regularized.png}
+    \caption{Identified governing equation for the falling ball system with noisy data and regularization}
+    \label{fig:ball-drop-identified-equation-regularized}
+\end{figure}
+As it can be seen, the identified governing equation is much closer to the 
+true governing equation and can be considered very good despite
+the very high amount of noise. This shows that regularization can significantly
+improve the results of SINDy in the presence of noise.\par
 
+\subsection{Discrepancy}
 
+As the end goal of the project was to identify discrepancies between
+real world measurements and idealised models, the next step was to
+introduce a discrepancy to the system and see if SINDy can identify it.
+For this purpose, I added a discepancy term to the governing equation
+presented in equation (28):
+\begin{equation}
+    a = - \frac{1}{2} \cdot \rho \cdot C_d(Re(v)) \cdot A \cdot v^2 / m + g + discrepancy \cdot v
+\end{equation}
+The discrepancy term is a linear function of the velocity, and the 
+coefficient of the discrepancy term is 0.5. \par
+As the next step, I calculated the acceleration, velocity and position values
+with the discrepancy term included, and then applied SINDy on the
+difference of the acceleration values with and without the discrepancy term.
+The libary of candidate functions was the same as before but made up
+of the velocity and position values with the discrepancy term included.\par
+First of all, the SVD of the library matrix was examined, the singular values are:
+\begin{equation}
+    \bm{\sigma} = \begin{bmatrix}
+        63.1290 \\
+        20.0339 \\
+        10.4604 \\
+        3.3828 \\
+        1.5423 \\
+        0.3099 \\
+        0.1589 \\
+        0.0667 \\
+        0.0063 \\
+        0.0006
+    \end{bmatrix}
+\end{equation}
+As seen in the equation above, there are some small singular values,
+so the right singular vector corresponding to the smallest singular 
+value is examined:
+\begin{equation}
+    \bm{v} = \begin{bmatrix}
+    -3.6820 \cdot 10^{-5} \\
+    0.0008 \\
+    0.0014 \\
+    0.2189 \\
+    -0.0265 \\
+    -0.6692 \\
+    0.6729 \\
+    -0.2236 \\
+    -0.0014 \\
+    0.0268 \\
+    \end{bmatrix}
+\end{equation}
+As it can be seen, the sixth and seventh terms are dominant,
+which indicates linearity between the corresponding functions in the library.
+By throwing out the seventh function based on the considerations as before
+and recalculating the SVD, the singular values are:
+\begin{equation}
+    \bm{\sigma} = \begin{bmatrix}
+    59.8664 \\
+    18.7980 \\
+    10.3796 \\
+    3.3826 \\
+    1.5399 \\
+    0.2718 \\
+    0.1485 \\
+    0.0659 \\
+    0.0059
+    \end{bmatrix}
+\end{equation}
+The last can still be considered small, so the right singular vector corresponding
+to the smallest singular value is examined again:
+\begin{equation}
+    \bm{v} = \begin{bmatrix}
+    -0.0004 \\
+    0.0234 \\
+    -0.1022 \\
+    0.7520 \\
+    -0.1579 \\
+    -0.0363 \\
+    -0.6179 \\
+    0.0147 \\
+    0.1228
+    \end{bmatrix}
+\end{equation}
+The fourth and seventh terms are dominant, so the seventh function is thrown out. 
+The singular values after recalculation:
+\begin{equation}
+    \bm{\sigma} = \begin{bmatrix}
+    56.0936 \\
+    18.5208 \\
+    10.3414 \\
+    3.0143 \\
+    1.5392 \\
+    0.2651 \\
+    0.1425 \\
+    0.0533
+    \end{bmatrix}
+\end{equation}
+
+\newpage
+
+Now that there are no particularly small singular values, the regression problem 
+can be solved to determine the coefficients. The sparsity is enforced with a thresholding value
+of 1.4 and the coefficients are denormalized. The final results are:
+\begin{equation}
+    \bm{\Xi} = \begin{bmatrix}
+        0 \\
+        0.0483 \\
+        0 \\
+        0 \\
+        0 \\
+        0 \\
+        0 \\
+        0 \\
+        0 \\
+        -3.4598 \cdot 10^{-5}
+    \end{bmatrix}
+\end{equation}
+This means that the identified equation for the discrepancy is:
+\begin{equation}
+    discrepancy = 0.0483 \cdot v - 3.4598 \cdot 10^{-5} \cdot v^3
+\end{equation}
+Interestingly, by further increasing the thresholding value, both
+coefficients are set to zero.\par
+
+This correction equation is added to the ideal governing equation, 
+and the results are visually represented in Figure \ref{fig:ball-drop-discrepancy}.\par
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{ball_drop_discrepancy.png}
+    \caption{Identified discrepancy}
+    \label{fig:ball-drop-discrepancy}
+\end{figure}
+As it can be seen, the identified governing equation with the discrepancy term 
+is very close to the true governing equation.
+
+As a Neural Network could be also used for discrepancy identification,
+I trained a simple feedforward neural network with one hidden layer of 
+10 neurons to predict the discrepancy.
+The input of the networks was the acceleration values with the discrepancy term,
+meanwhile the output was the difference between the acceleration values with and 
+without the discrepancy term.
+The results are visually represented in Figure \ref{fig:ball-drop-discrepancy-nn}.\par
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{ball_drop_discrepancy_nn.png}
+    \caption{Identified discrepancy with a Neural Network}
+    \label{fig:ball-drop-discrepancy-nn}
+\end{figure}
+As expected, the Neural Network was also able to identify the discrepancy, however,
+not in an easily interpretable way, as SINDy did.
+
+\section{Summary}
+In this project, the SINDy method was applied to identify the governing equations of
+two different systems, a spring-mass-damper system and a falling ball with
+nonlinear aerodynamic drag. The results showed that SINDy was able to successfully
+identify the governing equations of both systems from noisy measurement data, 
+and that smoothing the data before numerical differentiation can significantly 
+improve the results. It was also shown that the choice of the candidate functions 
+in the library is very important, and linearly dependent functions should be avoided,
+otherwise the regression problem cannot be solved. By using SVD, the
+linearly dependent functions can be identified and thrown out, making the regression
+problem solvable. In the case of the falling ball system, it was also shown that
+regularization can significantly improve the results of SINDy in the presence of
+high noise. Finally, a discrepancy was introduced to the falling ball system, 
+and SINDy was able to identify the discrepancy so the corrected governing equation
+could be created,
+which was very close to the true governing equation. A Neural Network was also trained
+to identify the discrepancy, and it was able to do so, but not in an easily interpretable
+way, as SINDy did. 
+
+\section{Future Work}
+For future work, it would be interesting to compare SINDy and NN while not training
+it on all the available data, but only on a subset of it and see how they perform.
+It would also be interesting to apply SINDy to a more complex system and
+to make measurements in a real world experiment to see how well the discrepancy
+can be identified with SINDy and a Neural Network. Finally, it would be interesting
+to explore other methods for discrepancy identification.
 
 
 \newpage

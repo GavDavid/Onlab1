@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.11.2)  13 MAY 2026 23:22
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.11.2)  15 MAY 2026 22:19
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1092,7 +1092,7 @@ File: translations-basic-dictionary-english.trsl (english translation file `tran
 )
 Package translations Info: loading dictionary `translations-basic-dictionary' for `english'. on input line 95.
 \c@lstlisting=\count504
-<viklogo.jpeg, id=26, 72.27pt x 72.0291pt>
+<viklogo.jpeg, id=42, 72.27pt x 72.0291pt>
 File: viklogo.jpeg Graphic file (type jpg)
 <use viklogo.jpeg>
 Package pdftex.def Info: viklogo.jpeg  used on input line 100.
@@ -1107,17 +1107,17 @@ Package pdftex.def Info: viklogo.jpeg  used on input line 100.
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.167 \newpage
+l.169 \newpage
                [1]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\cite' on input line 171.
+(hyperref)                removing `\cite' on input line 173.
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 176.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 178.
 (C:\Users\gaval\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 176.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 178.
  (C:\Users\gaval\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
@@ -1128,17 +1128,17 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.312 \newpage
+l.315 \newpage
               ]
-<spring_mass_data.png, id=81, 526.96875pt x 395.22656pt>
+<spring_mass_data.png, id=95, 526.96875pt x 395.22656pt>
 File: spring_mass_data.png Graphic file (type png)
 <use spring_mass_data.png>
-Package pdftex.def Info: spring_mass_data.png  used on input line 318.
+Package pdftex.def Info: spring_mass_data.png  used on input line 321.
 (pdftex.def)             Requested size: 324.36473pt x 243.283pt.
-<spring_mass_noisy_data.png, id=83, 526.96875pt x 395.22656pt>
+<spring_mass_noisy_data.png, id=97, 526.96875pt x 395.22656pt>
 File: spring_mass_noisy_data.png Graphic file (type png)
 <use spring_mass_noisy_data.png>
-Package pdftex.def Info: spring_mass_noisy_data.png  used on input line 331.
+Package pdftex.def Info: spring_mass_noisy_data.png  used on input line 333.
 (pdftex.def)             Requested size: 324.36473pt x 243.283pt.
 
 
@@ -1146,24 +1146,24 @@ Package pdftex.def Info: spring_mass_noisy_data.png  used on input line 331.
 pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.340 \begin{equation}
-                      
+l.346 \end{equation}
+                    
 pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.340 \begin{equation}
-                       <./spring_mass_data.png (PNG copy)> <./spring_mass_noisy_data.png (PNG copy)>]
+l.346 \end{equation}
+                     <./spring_mass_data.png (PNG copy)> <./spring_mass_noisy_data.png (PNG copy)>]
 
 [5]
-<spring_mass_identified_equation.png, id=100, 421.575pt x 316.0608pt>
+<spring_mass_identified_equation.png, id=114, 421.575pt x 316.0608pt>
 File: spring_mass_identified_equation.png Graphic file (type png)
 <use spring_mass_identified_equation.png>
-Package pdftex.def Info: spring_mass_identified_equation.png  used on input line 415.
+Package pdftex.def Info: spring_mass_identified_equation.png  used on input line 417.
 (pdftex.def)             Requested size: 324.36473pt x 243.1843pt.
-<spring_mass_identified_equation_noisy.png, id=102, 1156.32pt x 556.479pt>
+<spring_mass_identified_equation_noisy.png, id=116, 1156.32pt x 556.479pt>
 File: spring_mass_identified_equation_noisy.png Graphic file (type png)
 <use spring_mass_identified_equation_noisy.png>
-Package pdftex.def Info: spring_mass_identified_equation_noisy.png  used on input line 436.
+Package pdftex.def Info: spring_mass_identified_equation_noisy.png  used on input line 438.
 (pdftex.def)             Requested size: 324.36473pt x 156.09326pt.
 
 
@@ -1171,22 +1171,22 @@ Package pdftex.def Info: spring_mass_identified_equation_noisy.png  used on inpu
 pdfTeX warning (ext4): destination with the same identifier (name{figure.4}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.443 \begin{equation}
+l.445 \begin{equation}
                       
 pdfTeX warning (ext4): destination with the same identifier (name{figure.5}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.443 \begin{equation}
+l.445 \begin{equation}
                        <./spring_mass_identified_equation.png (PNG copy)> <./spring_mass_identified_equation_noisy.png (PNG copy)>]
-<spring_mass_identified_equation_very_noisy.png, id=113, 1445.4pt x 718.8456pt>
+<spring_mass_identified_equation_very_noisy.png, id=127, 1445.4pt x 718.8456pt>
 File: spring_mass_identified_equation_very_noisy.png Graphic file (type png)
 <use spring_mass_identified_equation_very_noisy.png>
-Package pdftex.def Info: spring_mass_identified_equation_very_noisy.png  used on input line 449.
+Package pdftex.def Info: spring_mass_identified_equation_very_noisy.png  used on input line 451.
 (pdftex.def)             Requested size: 324.36473pt x 161.31647pt.
-<spring_mass_identified_equation_smoothed.png, id=115, 421.575pt x 316.0608pt>
+<spring_mass_identified_equation_smoothed.png, id=129, 421.575pt x 316.0608pt>
 File: spring_mass_identified_equation_smoothed.png Graphic file (type png)
 <use spring_mass_identified_equation_smoothed.png>
-Package pdftex.def Info: spring_mass_identified_equation_smoothed.png  used on input line 467.
+Package pdftex.def Info: spring_mass_identified_equation_smoothed.png  used on input line 469.
 (pdftex.def)             Requested size: 324.36473pt x 243.1843pt.
 
 
@@ -1194,17 +1194,17 @@ Package pdftex.def Info: spring_mass_identified_equation_smoothed.png  used on i
 pdfTeX warning (ext4): destination with the same identifier (name{figure.6}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.474 \end{equation}
+l.476 \end{equation}
                     
 pdfTeX warning (ext4): destination with the same identifier (name{figure.7}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.474 \end{equation}
+l.476 \end{equation}
                      <./spring_mass_identified_equation_very_noisy.png (PNG copy)> <./spring_mass_identified_equation_smoothed.png (PNG copy)>]
-<spring_mass_identified_equation_smoothed_very_noisy.png, id=125, 421.575pt x 316.0608pt>
+<spring_mass_identified_equation_smoothed_very_noisy.png, id=139, 421.575pt x 316.0608pt>
 File: spring_mass_identified_equation_smoothed_very_noisy.png Graphic file (type png)
 <use spring_mass_identified_equation_smoothed_very_noisy.png>
-Package pdftex.def Info: spring_mass_identified_equation_smoothed_very_noisy.png  used on input line 478.
+Package pdftex.def Info: spring_mass_identified_equation_smoothed_very_noisy.png  used on input line 480.
 (pdftex.def)             Requested size: 324.36473pt x 243.1843pt.
 
 
@@ -1212,14 +1212,19 @@ Package pdftex.def Info: spring_mass_identified_equation_smoothed_very_noisy.png
 pdfTeX warning (ext4): destination with the same identifier (name{figure.8}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.524 \end{equation}
+l.526 \end{equation}
                      <./spring_mass_identified_equation_smoothed_very_noisy.png (PNG copy)>]
 
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\cite' on input line 563.
+
+
+
 [9]
-<drag_coefficient.png, id=143, 628.59843pt x 407.27156pt>
+<drag_coefficient.png, id=157, 628.59843pt x 407.27156pt>
 File: drag_coefficient.png Graphic file (type png)
 <use drag_coefficient.png>
-Package pdftex.def Info: drag_coefficient.png  used on input line 588.
+Package pdftex.def Info: drag_coefficient.png  used on input line 612.
 (pdftex.def)             Requested size: 324.36473pt x 210.15424pt.
 
 
@@ -1227,12 +1232,12 @@ Package pdftex.def Info: drag_coefficient.png  used on input line 588.
 pdfTeX warning (ext4): destination with the same identifier (name{figure.9}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.608     \item G
-                 ravitational acceleration $g = 9.81$ [m/s$^2$] <./drag_coefficient.png>]
-<ball_drop_ideal.png, id=159, 421.575pt x 316.0608pt>
+l.616 
+      ]
+<ball_drop_ideal.png, id=174, 421.575pt x 316.0608pt>
 File: ball_drop_ideal.png Graphic file (type png)
 <use ball_drop_ideal.png>
-Package pdftex.def Info: ball_drop_ideal.png  used on input line 614.
+Package pdftex.def Info: ball_drop_ideal.png  used on input line 638.
 (pdftex.def)             Requested size: 324.36473pt x 243.1843pt.
 
 
@@ -1240,38 +1245,111 @@ Package pdftex.def Info: ball_drop_ideal.png  used on input line 614.
 pdfTeX warning (ext4): destination with the same identifier (name{figure.10}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.660 \end{equation}
-                     <./ball_drop_ideal.png (PNG copy)>]
+l.642 
+       <./drag_coefficient.png>]
 
-[12]
-LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 678.
+[12
+pdfTeX warning (ext4): destination with the same identifier (name{figure.11}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.691 \begin{equation}
+                       <./ball_drop_ideal.png (PNG copy)>]
+
+[13]
+<ball_drop_identified_equation.png, id=199, 421.575pt x 316.0608pt>
+File: ball_drop_identified_equation.png Graphic file (type png)
+<use ball_drop_identified_equation.png>
+Package pdftex.def Info: ball_drop_identified_equation.png  used on input line 783.
+(pdftex.def)             Requested size: 324.36473pt x 243.1843pt.
+
+
+[14
+pdfTeX warning (ext4): destination with the same identifier (name{figure.12}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.791 \newpage
+               <./ball_drop_identified_equation.png (PNG copy)>]
+<ball_drop_identified_equation_noisy.png, id=208, 421.575pt x 316.0608pt>
+File: ball_drop_identified_equation_noisy.png Graphic file (type png)
+<use ball_drop_identified_equation_noisy.png>
+Package pdftex.def Info: ball_drop_identified_equation_noisy.png  used on input line 821.
+(pdftex.def)             Requested size: 324.36473pt x 243.1843pt.
+
+
+[15
+pdfTeX warning (ext4): destination with the same identifier (name{figure.13}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.841 \end{equation}
+                     <./ball_drop_identified_equation_noisy.png (PNG copy)>]
+<ball_drop_identified_equation_regularized.png, id=218, 1156.32pt x 557.9244pt>
+File: ball_drop_identified_equation_regularized.png Graphic file (type png)
+<use ball_drop_identified_equation_regularized.png>
+Package pdftex.def Info: ball_drop_identified_equation_regularized.png  used on input line 845.
+(pdftex.def)             Requested size: 324.36473pt x 156.49869pt.
+
+
+[16
+pdfTeX warning (ext4): destination with the same identifier (name{figure.14}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.889 \begin{equation}
+                       <./ball_drop_identified_equation_regularized.png (PNG copy)>]
+
+[17]
+<ball_drop_discrepancy.png, id=236, 1156.32pt x 557.9244pt>
+File: ball_drop_discrepancy.png Graphic file (type png)
+<use ball_drop_discrepancy.png>
+Package pdftex.def Info: ball_drop_discrepancy.png  used on input line 980.
+(pdftex.def)             Requested size: 324.36473pt x 156.49869pt.
+<ball_drop_discrepancy_nn.png, id=238, 421.575pt x 316.0608pt>
+File: ball_drop_discrepancy_nn.png Graphic file (type png)
+<use ball_drop_discrepancy_nn.png>
+Package pdftex.def Info: ball_drop_discrepancy_nn.png  used on input line 996.
+(pdftex.def)             Requested size: 324.36473pt x 243.1843pt.
+
+
+[18
+pdfTeX warning (ext4): destination with the same identifier (name{figure.15}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1000 A
+        s expected, the Neural Network was also able to identify the discrep... <./ball_drop_discrepancy.png (PNG copy)>]
+
+[19
+pdfTeX warning (ext4): destination with the same identifier (name{figure.16}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1031 \newpage
+                <./ball_drop_discrepancy_nn.png (PNG copy)>]
+LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 1032.
  (C:\Users\gaval\AppData\Local\Programs\MiKTeX\tex/latex/base\t1cmtt.fd
 File: t1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
 
-[13] (GavallerDavid_ES02RO_ProjectLaboratory1.aux)
+[20] (GavallerDavid_ES02RO_ProjectLaboratory1.aux)
  ***********
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-10-09>
  ***********
 Package rerunfilecheck Info: File `GavallerDavid_ES02RO_ProjectLaboratory1.out' has not changed.
-(rerunfilecheck)             Checksum: C2F0FA343A8FF5A5B60480D7E73EE120;907.
+(rerunfilecheck)             Checksum: 1B790C3C9BA5635CB8572D0FC42E25C9;1378.
 Package logreq Info: Writing requests to 'GavallerDavid_ES02RO_ProjectLaboratory1.run.xml'.
 \openout1 = `GavallerDavid_ES02RO_ProjectLaboratory1.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 47143 strings out of 473897
- 1087918 string characters out of 5726462
- 2034375 words of memory out of 5000000
- 69284 multiletter control sequences out of 15000+600000
- 574787 words of font info for 77 fonts, out of 8000000 for 9000
+ 47250 strings out of 473897
+ 1090571 string characters out of 5726462
+ 2034850 words of memory out of 5000000
+ 69357 multiletter control sequences out of 15000+600000
+ 574446 words of font info for 76 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,12n,93p,849b,1747s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\gaval\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1200.pk> <C:\Users\gaval\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\eccc1200.pk> <C:\Users\gaval\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1200.pk> <C:\Users\gaval\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\gaval\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk> <C:\Users\gaval\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\gaval\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1728.pk> <C:\Users\gaval\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1095.pk> <C:\Users\gaval\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1095.pk> <C:\Users\gaval\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1440.pk> <C:\Users\gaval\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1440.pk> <C:\Users\gaval\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2074.pk><C:/Users/gaval/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/gaval/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/gaval/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/gaval/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/gaval/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmib10.pfb><C:/Users/gaval/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/gaval/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/gaval/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/gaval/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/gaval/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on GavallerDavid_ES02RO_ProjectLaboratory1.pdf (14 pages, 1113963 bytes).
+ 84i,12n,93p,1607b,1747s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\gaval\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1200.pk> <C:\Users\gaval\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\eccc1200.pk> <C:\Users\gaval\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1200.pk> <C:\Users\gaval\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\gaval\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk> <C:\Users\gaval\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\gaval\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1728.pk> <C:\Users\gaval\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1095.pk> <C:\Users\gaval\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1095.pk> <C:\Users\gaval\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1440.pk> <C:\Users\gaval\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2074.pk><C:/Users/gaval/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/gaval/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/gaval/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/gaval/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/gaval/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmib10.pfb><C:/Users/gaval/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/gaval/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/gaval/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/gaval/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/gaval/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on GavallerDavid_ES02RO_ProjectLaboratory1.pdf (21 pages, 1563230 bytes).
 PDF statistics:
- 571 PDF objects out of 1000 (max. 8388607)
- 68 named destinations out of 1000 (max. 500000)
- 103 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 686 PDF objects out of 1000 (max. 8388607)
+ 103 named destinations out of 1000 (max. 500000)
+ 160 words of extra memory for PDF output out of 10000 (max. 10000000)
 
